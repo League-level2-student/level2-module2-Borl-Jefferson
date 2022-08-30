@@ -11,7 +11,9 @@ public class LeagueSnake extends PApplet {
      * 
      * Put all the game variables here.
      */
-    
+Segment head;
+int fx;
+int fy;
 
     
     /*
@@ -22,16 +24,29 @@ public class LeagueSnake extends PApplet {
     @Override
     public void settings() {
         
+    	
+    	
+    	
+    	//it's 500,500 for now, but make it so there are 3 different difficulties modes that change the size
+    	
+    	
+    	
+    	
     }
 
     @Override
     public void setup() {
+        head = new Segment(250, 250);
+        frameRate(20);
+        dropFood();
+        
         
     }
 
     void dropFood() {
         // Set the food in a new random location
-        
+    	fx = ((int)random(50)*10);
+    	fy = ((int)random(50)*10);
     }
 
     /*
