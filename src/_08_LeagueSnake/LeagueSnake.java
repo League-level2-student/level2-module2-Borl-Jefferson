@@ -1,6 +1,7 @@
 package _08_LeagueSnake;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import processing.core.PApplet;
 
@@ -21,7 +22,14 @@ int hy = 250;
 int dir = UP;
 int food = 0;
 boolean fail = false;
-ArrayList<Integer> tail = new ArrayList<Integer>();
+int nowx= 250;
+int nowy = 250;
+ArrayList<Segment> segments = new ArrayList<Segment>();
+ArrayList<Integer> nx = new ArrayList<Integer>();
+ArrayList<Integer> ny = new ArrayList<Integer>();
+ArrayList<Integer> px = new ArrayList<Integer>();
+ArrayList<Integer> py = new ArrayList<Integer>();
+
     /*
      * Setup methods
      * 
@@ -29,7 +37,7 @@ ArrayList<Integer> tail = new ArrayList<Integer>();
      */
     @Override
     public void settings() {
-        
+
     	
     	size(500, 500);
     	
@@ -42,11 +50,14 @@ ArrayList<Integer> tail = new ArrayList<Integer>();
 
     @Override
     public void setup() {
-        head = new Segment(250, 250);
+        head = new Segment(250, 250, this);
         frameRate(20);
         dropFood();
      
-        
+        px.add(5);
+        py.add(5);
+        ny.add(5);
+        nx.add(5);
     }
 
     void dropFood() {
@@ -63,13 +74,13 @@ ArrayList<Integer> tail = new ArrayList<Integer>();
 
     @Override
     public void draw() {
-        background(50, 150, 255);
+        background(150, 150, 255);
            drawFood();
        move();
         drawSnake();
          
         eat();
-    
+
     }
 
     void drawFood() {
@@ -80,15 +91,28 @@ fill(198,137,88);
     }
 
     void drawSnake() {
-    	stroke(0,255,0);
-    	fill(0,255,0);      
+    	stroke(50,255,100);
+    	fill(50,255,100);      
     	square(hx, hy, 15);
+px.remove(px.get(px.size()-1));
+py.remove(py.get(py.size()-1));
+px.add(nowx);
+py.add(nowy);
+    	nowy= hy;
+    	nowx= hx;
+    	nx.remove(nx.get(px.size()-1));
+    	ny.remove(ny.get(px.size()-1));
+ nx.add(hx);
+ ny.add(hy);   
+
     	// Draw the head of the snake followed by its tail
     }
 
     void drawTail() {
         // Draw each segment of the tail
-        
+    	for(int i = food; i > 0; i--) {
+    segments.add(new Segment(px.get(i-1), py.get(i-1), this));
+    	}
     }
 
     /*
@@ -101,6 +125,15 @@ fill(198,137,88);
         // After drawing the tail, add a new segment at the "start" of the tail and
         // remove the one at the "end"
         // This produces the illusion of the snake tail moving.
+    	
+    	//save location of f1 and makethe next ny/x =f1 for f2 then remove my/x.getsize
+    	// past = f1, now = f2
+    	
+//for (int i=food-1; i < 0; i--) {
+	
+//}
+
+
 
     }
 
