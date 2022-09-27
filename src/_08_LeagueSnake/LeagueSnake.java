@@ -73,12 +73,12 @@ public class LeagueSnake extends PApplet {
 	public void draw() {
 		background(150, 150, 255);
 		drawFood();
-		move();
+		
 		drawSnake();
 
 		eat();
 		manageTail();
-
+move();
 		/*
 		 * px.remove(px.get(px.size()-1)); py.remove(py.get(py.size()-1)); px.add(nowx);
 		 * py.add(nowy); nowy= hy; nowx= hx; nx.remove(nx.get(px.size()-1));
@@ -129,7 +129,7 @@ public class LeagueSnake extends PApplet {
 
 //}
 		segments.add(new Segment(hx, hy, this));
-		segments.remove(segments.size() -1);
+		segments.remove(0);
 		System.out.println(hx + " " + hy);
 		// segments.add(new Segment(250, 250, this));
 
@@ -222,9 +222,9 @@ public class LeagueSnake extends PApplet {
 			if (fy >= hys && fy <= hya) {
 				food += 1;
 				dropFood();
-
+for(int i =10; i>0; i--) {
 				segments.add(new Segment(hx, hy, this));
-
+}
 			}
 
 		}
